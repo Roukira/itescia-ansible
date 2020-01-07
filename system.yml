@@ -18,3 +18,10 @@
     package:
       name: vim
       state: present
+
+  - name: "SSH authorized key for youcefadmin"
+    become: true
+    authorized_key:
+      user: youcefadmin
+      state: present
+      key: "{{ lookup('file', '/home/itesciadmin/.ssh/id_rsa.pub') }}"
