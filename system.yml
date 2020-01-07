@@ -10,6 +10,7 @@
       - youcefadmin2
       - youcefadmin3
 
+  #vars prompt si on veut
   #vars_prompt:
   #  - name: new_user_name
   #    prompt: "What is the username of the new user?"
@@ -24,6 +25,7 @@
     become: true
     user:
       name: "{{ item }}"
+      shell: /bin/bash
     with_items:
       - "{{ new_user_name_list }}"
 
