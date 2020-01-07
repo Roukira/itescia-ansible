@@ -1,0 +1,20 @@
+---
+- hosts: all
+
+  tasks:
+  - name: Add the user "youcefadmin"
+    become: true
+    user:
+      name: youcefadmin
+
+  - name: "Deploy package htop"
+    become: true
+    package:
+      name: htop
+      state: present
+
+  - name: "Deploy package vim"
+    become: true
+    package:
+      name: vim
+      state: present
