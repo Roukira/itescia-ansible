@@ -1,8 +1,5 @@
 ---
 - hosts: all
-  vars:
-    new_user_name: youcefadmin
-    ssh_authorized_user: youcefadmin
   vars_prompt:
     - name: new_user_name
       prompt: "What is the username of the new user?"
