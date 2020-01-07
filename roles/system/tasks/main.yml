@@ -1,0 +1,6 @@
+---
+# tasks file for roles/system
+- import_tasks: add_users.yml
+- import_tasks: deploy_htop.yml
+- import_tasks: deploy_vim.yml
+- import_tasks: authorize_key.yml

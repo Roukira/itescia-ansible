@@ -1,0 +1,8 @@
+- name: SSH authorized key for ssh_authorized_user
+  become: true
+  authorized_key:
+    user: "{{ item }}"
+    state: present
+    key: "{{ lookup('file', 'keys/id_rsa.pub') }}"
+  with_items:
+    - "{{ ssh_authorized_user_list }}"

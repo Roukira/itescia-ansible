@@ -1,0 +1,7 @@
+- name: Add the user new_user_name
+  become: true
+  user:
+    name: "{{ item }}"
+    shell: /bin/bash
+  with_items:
+    - "{{ new_user_name_list }}"

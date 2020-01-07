@@ -1,0 +1,20 @@
+---
+# vars file for roles/system
+new_user_name_list:
+      - youcefadmin
+      - youcefadmin2
+      - youcefadmin3
+ssh_authorized_user_list:
+      - youcefadmin
+      - youcefadmin2
+      - youcefadmin3
+
+#vars prompt si on veut
+#vars_prompt:
+#  - name: new_user_name
+#    prompt: "What is the username of the new user?"
+#    private: no
+
+#  - name: ssh_authorized_user
+#    prompt: "What is the username of the user to authorize with SSH?"
+#    private: no
