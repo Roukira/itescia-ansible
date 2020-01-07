@@ -3,5 +3,6 @@
   user:
     name: "{{ item }}"
     shell: /bin/bash
+    state: present
   with_items:
     - "{{ new_user_name_list }}"

@@ -3,6 +3,6 @@
   authorized_key:
     user: "{{ item }}"
     state: present
-    key: "{{ lookup('file', 'keys/id_rsa.pub') }}"
+    key: "{{ lookup('file', 'keys/{{ item }}.pub') }}"
   with_items:
     - "{{ ssh_authorized_user_list }}"
