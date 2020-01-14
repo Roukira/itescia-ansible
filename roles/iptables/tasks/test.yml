@@ -1,0 +1,36 @@
+- name: Enable IPv4 forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
+
+    reload: True
+
+- name: Masquerade
+  iptables:
+    table: nat
+    chain: POSTROUTING
+    out_interface: ens39
+    jump: MASQUERADE
+  become: yes
+
+- name: Forward port 53 to dns 53
+  iptables:
+    table: nat
+    chain: PREROUTING
+    in_interface: ens39
+    protocol: udp
+    destination_port: 53
+    jump: DNAT
+    to_destination: 10.0.0.102:53
+  become: yes
+
+- name: Accept
+  iptables:
+    chain: FORWARD
+    in_interface: ens39
+    protocol: udp
+    destination_port: 53
+    jump: ACCEPT
+  become: yes
+
