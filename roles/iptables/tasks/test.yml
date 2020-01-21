@@ -3,34 +3,42 @@
     name: net.ipv4.ip_forward
     value: 1
     state: present
-
     reload: True
 
 - name: Masquerade
   iptables:
     table: nat
     chain: POSTROUTING
-    out_interface: ens39
+    out_interface: "{{ item.interface }}"
     jump: MASQUERADE
   become: yes
+  with_items:
+     - "{{ dns }}"
+     - "{{ smtp }}"
 
-- name: Forward port 53 to dns 53
+- name: Forward port to dns
   iptables:
     table: nat
     chain: PREROUTING
-    in_interface: ens39
-    protocol: udp
-    destination_port: 53
+    in_interface: "{{ item.interface }}"
+    protocol: "{{ item.protocol }}"
+    destination_port: "{{ item.port }}"
     jump: DNAT
-    to_destination: 10.0.0.102:53
+    to_destination: "{{ item.to_destination }}"
   become: yes
+  with_items:
+     - "{{ dns }}"
+     - "{{ smtp }}"
 
 - name: Accept
   iptables:
     chain: FORWARD
-    in_interface: ens39
-    protocol: udp
-    destination_port: 53
+    in_interface: "{{ item.interface }}"
+    protocol: "{{ item.protocol }}"
+    destination_port: "{{ item.port }}"
     jump: ACCEPT
   become: yes
+  with_items:
+     - "{{ dns }}"
+     - "{{ smtp }}"
 

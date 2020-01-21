@@ -1,0 +1,4 @@
+- name : Setup iptables
+  hosts: gateway
+  roles:
+    - iptables

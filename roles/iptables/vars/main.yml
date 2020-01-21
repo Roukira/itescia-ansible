@@ -1,3 +1,7 @@
 ---
 # vars file for roles/iptables
+dns:
+  - {interface: "ens39", port: "53", protocol: "udp", to_destination: "10.0.0.102:53"}
+smtp:
+  - {interface: "ens39", port: "25", protocol: "tcp", to_destination: "10.0.0.202:25"}
 
